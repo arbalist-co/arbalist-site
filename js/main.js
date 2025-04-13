@@ -60,6 +60,9 @@ document.addEventListener('DOMContentLoaded', function() {
             isFollowingMouse = true;
             pixelCompanion.querySelector('.pixel-face').textContent = '^_^';
             pixelCompanion.querySelector('.pixel-body').style.transform = 'rotate(0deg) scale(1)';
+            // Reset background to white
+            pixelCompanion.querySelector('.pixel-body').style.background = '#fff';
+            pixelCompanion.querySelector('.pixel-face').style.color = '';
             logo.classList.remove('active');
         } else {
             // Go to home
@@ -157,6 +160,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Final transform
                 pixelCompanion.querySelector('.pixel-body').style.transform = 
                     'rotate(45deg) scale(0.5)';
+                
+                // Apply gradient background when sleeping
+                pixelCompanion.querySelector('.pixel-body').style.background = 
+                    '#ff7eb3';
+                pixelCompanion.querySelector('.pixel-face').style.color = '#ffffff';
             }
         }
         

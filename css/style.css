@@ -33,7 +33,7 @@ body {
     align-items: center;
     position: fixed;
     width: 100%;
-    background: rgba(255, 255, 255, 0.9);
+    background: linear-gradient(90deg, #ff7eb3, #7b68ee);
     backdrop-filter: blur(10px);
     z-index: 1000;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -82,16 +82,68 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #1e1e2e;
+    background: #121212;
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(123, 104, 238, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(255, 126, 179, 0.1) 0%, transparent 50%);
     color: #ffffff;
     position: relative;
 }
 
+/* Add decorative elements for glassmorphism effect */
+.hero::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMDMpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=');
+    opacity: 0.5;
+}
+
+.hero::after {
+    content: none;
+}
+
 .hero-content {
     text-align: center;
-    padding: var(--spacing);
+    padding: 3rem;
     max-width: 800px;
     z-index: 2;
+    border-radius: 8px;
+}
+
+/* Floating blobs for additional glassmorphism effect */
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.15;
+    z-index: 1;
+}
+
+.blob-1 {
+    width: 400px;
+    height: 400px;
+    background: rgba(123, 104, 238, 0.2);
+    top: 30%;
+    left: 15%;
+    animation: float-slow 25s ease-in-out infinite;
+}
+
+.blob-2 {
+    width: 350px;
+    height: 350px;
+    background: rgba(255, 126, 179, 0.15);
+    bottom: 20%;
+    right: 15%;
+    animation: float-slow 18s ease-in-out infinite reverse;
+}
+
+@keyframes float-slow {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(2%, 2%) rotate(2deg); }
+    66% { transform: translate(-1%, -1%) rotate(-1deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
 }
 
 .hero-logo {
@@ -104,21 +156,36 @@ body {
     font-size: 3.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    background: linear-gradient(90deg, #ff7eb3, #7b68ee);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: white;
+    letter-spacing: -0.5px;
 }
 
 .hero-description {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     margin-bottom: 2rem;
-    opacity: 0.9;
+    opacity: 0.85;
     line-height: 1.6;
+    font-weight: 300;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .hero-cta {
     margin-top: 2rem;
+}
+
+.hero .btn.primary {
+    background: linear-gradient(90deg, rgba(123, 104, 238, 0.9), rgba(123, 104, 238, 1));
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.hero .btn.primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
 }
 
 /* Buttons */
@@ -145,57 +212,113 @@ body {
 }
 
 .btn.secondary {
-    background: transparent;
+    background: linear-gradient(90deg, #ff7eb3, #7b68ee);
     color: white;
-    border: 2px solid rgba(255,255,255,0.3);
 }
 
 .btn.secondary:hover {
-    border-color: white;
+    border-color: linear-gradient(90deg, #ff7eb3, #7b68ee);
 }
 
 /* Projects Section */
 .projects {
     padding: var(--spacing);
     background-color: var(--secondary);
+    position: relative;
+    overflow: hidden;
+}
+
+.projects::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: linear-gradient(135deg, rgba(255, 126, 179, 0.05) 0%, rgba(123, 104, 238, 0.05) 100%);
+    z-index: 0;
 }
 
 .projects h2 {
     text-align: center;
     margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
 }
 
 .project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
 .project-card {
-    background: var(--secondary);
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-radius: var(--radius);
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    position: relative;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #ff7eb3, #7b68ee);
+    z-index: 1;
 }
 
 .project-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
 }
 
 .project-image {
-    height: 200px;
+    height: 150px;
     background-size: cover;
     background-position: center;
 }
 
 .project-card h3 {
-    margin: 1rem;
+    margin: 0.5rem 0 1rem;
+    color: #333;
+    position: relative;
+    display: inline-block;
+}
+
+.project-card h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, #ff7eb3, #7b68ee);
 }
 
 .project-card p {
-    margin: 0 1rem 1rem;
+    margin-bottom: 1.5rem;
     opacity: 0.8;
+    line-height: 1.6;
+}
+
+/* Blurred text styling */
+.blur-text {
+    color: transparent;
+    text-shadow: 0 0 8px rgba(0,0,0,0.5);
+    user-select: none;
 }
 
 /* Team Section */
@@ -270,6 +393,19 @@ body {
     margin: 1rem auto 0;
     line-height: 1.5;
     padding: 0 1rem;
+}
+
+/* Team links styling */
+.team-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    cursor: pointer;
+}
+
+.team-link:hover {
+    text-decoration: none;
+    color: inherit;
 }
 
 /* Join Section */
